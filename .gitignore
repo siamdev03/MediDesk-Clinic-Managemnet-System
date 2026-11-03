@@ -1,0 +1,15 @@
+node_modules
+dist
+.DS_Store
+
+# secrets – NEVER commit
+.env
+.env.*
+!.env.example
+
+# runtime data (lives on the server, not in git)
+server/uploads/*
+!server/uploads/.gitkeep
+server/backups/*
+!server/backups/.gitkeep
+*.log
