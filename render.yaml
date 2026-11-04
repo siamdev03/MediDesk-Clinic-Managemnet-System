@@ -1,17 +1,14 @@
 # Render Blueprint – New ▸ Blueprint ▸ select this repo. Fill the 3 "sync: false" values when asked.
+# FREE-PLAN TEST VERSION. For a real clinic switch back to: plan: starter + disk block + UPLOAD_DIR/BACKUP_DIR.
 services:
   - type: web
     name: medidesk
     runtime: node
     region: singapore
-    plan: starter            # free plan sleeps and has no disk – do not use it for a clinic
+    plan: free               # free = sleeps after 15 min idle, no disk. Use "starter" for a real clinic
     buildCommand: npm install --prefix server && npm install --include=dev --prefix client && npm run build --prefix client
     startCommand: npm start --prefix server
     healthCheckPath: /api/health
-    disk:
-      name: data
-      mountPath: /var/data
-      sizeGB: 1
     envVars:
       - key: NODE_VERSION
         value: 20
@@ -23,10 +20,6 @@ services:
         value: 7d
       - key: TIMEZONE
         value: Asia/Dhaka
-      - key: UPLOAD_DIR
-        value: /var/data/uploads
-      - key: BACKUP_DIR
-        value: /var/data/backups
       - key: AUTO_BACKUP
         value: "true"
       - key: BACKUP_HOUR
